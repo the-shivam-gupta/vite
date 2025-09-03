@@ -3,21 +3,29 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// assets
+import svg from "../assets/Growth-corridor.svg";
+import bandraWorli from "../assets/circle/Bandra-Worli.webp";
+import BulletTrain from "../assets/circle/Bullet-train.webp";
+import img_1 from "../assets/circle/img_1.webp";
+import metroLines from "../assets/circle/Metro-Lines.webp";
+import mumbaiCoastalRoad from "../assets/circle/Mumbai-Coastal-Road.webp";
+
 const HeroSection = () => {
   gsap.registerPlugin(ScrollTrigger);
   const textRef = useRef(null);
 
   useEffect(() => {
     const el = textRef.current;
-    const chars = el.querySelectorAll("span"); 
+    const chars = el.querySelectorAll("span");
 
     gsap.fromTo(
       chars,
-      { color: "#374151" },
+      { color: "#9ca3af" }, // gray-400
       {
-        color: "#ffffff", 
+        color: "#1f2937", // gray-900
         duration: 0.3,
-        stagger: 0.019, 
+        stagger: 0.02,
         scrollTrigger: {
           trigger: el,
           start: "top 80%",
@@ -26,8 +34,8 @@ const HeroSection = () => {
       }
     );
   }, []);
-  
-  // Function to split text into spans
+
+  // Split text into spans for animation
   const splitText = (text) =>
     text.split("").map((char, i) => (
       <span key={i} className="inline-block">
@@ -36,94 +44,93 @@ const HeroSection = () => {
     ));
 
   return (
-    <div className="min-h-screen w-full">
-      {/* header text 1 */}
-      <h1 className="text-4xl font-serif z-20 text-center text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-green-200 sm:text-5xl">
+    <section className="relative w-full min-h-screen bg-white flex flex-col items-center justify-center px-6 py-16 sm:py-24">
+      {/* Title */}
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif text-center text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-700">
         What are growth corridors?
       </h1>
+
+      {/* Animated paragraph */}
       <p
         ref={textRef}
-        className="text-lg leading-5 mt-3 text-center text-gray-200 z-30"
+        className="max-w-3xl mt-6 text-center text-base sm:text-lg leading-relaxed text-gray-600"
       >
         {splitText(
-          "So growth corridor is a government term that's used to describe a large area. that's expected to undergo a big population change in the future."
+          "A Growth Corridor is not defined by geography alone — it is the intersection of momentum, infrastructure, and aspiration. It is where four powerful forces converge to create sustainable economic, social, and urban acceleration."
         )}
       </p>
-      <h3 className="mt-5 text-2xl text-center text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-green-200">
+
+      {/* Social ecosystem */}
+      <h3 className="mt-10 text-xl sm:text-2xl font-medium text-center text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-700">
         A thriving social ecosystem
       </h3>
-      {/* Image */}
-      <div className="relative flex flex-col items-center mt-8">
-        <img
-          src="src/assets/Growth-corridor.svg"
-          className="w-[30rem] sm:w-[40rem]"
-        />
+      <p className="max-w-2xl mt-3 text-center text-sm sm:text-base text-gray-500">
+        Schools, hospitals, retail, entertainment, and housing that attract
+        communities.
+      </p>
 
-        {/* Header text 2 */}
-        <div className="mt-6 text-center">
-          <h1 className="text-4xl font-serif bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-green-200 sm:text-5xl">
-            Great Western Growth Corridor
-          </h1>
-          <p className="text-sm mt-3 text-gray-200">
-            The word "para" has multiple distinct meanings, including a section
-            of text or a part of the Quran, a military unit, especially a
-            parachute regiment,
-            <br /> and a medical term for pregnancies. Context is crucial for
-            understanding which "para" is being referenced, as each refers to a
-            completely different concept,
-            <br /> from religious scripture divisions and military operations to
-            the medical history of a patient.
-          </p>
-        </div>
-        {/* slider */}
-        <div className="relative w-full overflow-hidden mt-8">
-          <motion.div
-            className="flex gap-4 px-10"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              ease: "linear",
-              duration: 15,
-              repeat: Infinity,
-            }}
-          >
-            {/* Original images */}
-            <img
-              src="src/assets/circle/Bandra-Worli.webp"
-              className="w-[12rem] sm:w-[18rem] flex-shrink-0"
-            />
-            <img
-              src="src/assets/circle/Bullet-Train.webp"
-              className="w-[12rem] sm:w-[18rem] flex-shrink-0"
-            />
-            <img
-              src="src/assets/circle/img_1.webp"
-              className="w-[12rem] sm:w-[18rem] flex-shrink-0"
-            />
-            <img
-              src="src/assets/circle/Metro-Lines.webp"
-              className="w-[12rem] sm:w-[18rem] flex-shrink-0"
-            />
-            <img
-              src="src/assets/circle/Mumbai-Coastal-Road.webp"
-              className="w-[12rem] sm:w-[18rem] flex-shrink-0"
-            />
-          </motion.div>
-        </div>
-        {/* para text */}
-        <p className="text-center mx-14 mt-6 mb-10 text-sm">
-          A paragraph is a series of sentences that are organized and coherent,
-          and are all related to a single topic.Almost every piece of writing
-          you do that is longer than a few sentences should be organized into
-          paragraphs. This is because paragraphs show a reader where the
-          subdivisions of an essay begin and end, and thus help the reader see
-          the organization of the essay
-          <br /> and grasp its main points.Religious scripture divisions and
-          military operations to the medical history of a patient.
-        </p>
-        {/* line */}
-        <div className="h-[1px] bg-gray-300 w-full" />
+      {/* Illustration */}
+      <div className="mt-10 flex justify-center">
+        <img
+          src={svg}
+          alt="Growth ecosystem"
+          className="w-[22rem] sm:w-[32rem]"
+        />
       </div>
-    </div>
+
+      {/* Corridor headline */}
+      <div className="mt-12 text-center max-w-4xl">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-700">
+          Great Western Growth Corridor
+        </h2>
+        <p className="mt-4 text-gray-600 text-sm sm:text-base leading-relaxed">
+          The Great Western Corridor — stretching from Andheri to Virar — is one
+          of India’s most defining urban growth frontiers. It is where Mumbai’s
+          potential meets its future, supercharged by once-in-a-generation
+          infrastructure investments.
+        </p>
+      </div>
+
+      {/* Image slider */}
+      <div className="relative w-full overflow-hidden mt-12">
+        <motion.div
+          className="flex gap-8 px-10"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            ease: "linear",
+            duration: 25,
+            repeat: Infinity,
+          }}
+        >
+          {[bandraWorli, BulletTrain, img_1, metroLines, mumbaiCoastalRoad].map(
+            (src, i) => (
+              <div
+                key={i}
+                className="flex-shrink-0 h-40 w-40 sm:h-56 sm:w-56 rounded-full overflow-hidden shadow-lg"
+              >
+                <img
+                  src={src}
+                  alt={`slide-${i}`}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            )
+          )}
+        </motion.div>
+      </div>
+
+      {/* Closing paragraph */}
+      <p className="max-w-3xl mt-10 mb-12 text-center text-sm sm:text-base text-gray-600 leading-relaxed">
+        With over a dozen major transport projects underway — from the Mumbai
+        Coastal Road and Bandra–Versova Sea Link to the Mumbai–Ahmedabad Bullet
+        Train — the Western Suburbs are being rewired for the 21st century. The
+        Great Western Growth Corridor isn’t just a stretch of land. It’s a
+        stretch of time — from what Mumbai was, to what Mumbai can become.
+      </p>
+
+      {/* Divider line */}
+      <div className="w-full h-px bg-gray-300" />
+    </section>
   );
 };
 

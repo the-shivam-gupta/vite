@@ -52,7 +52,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto">
       <form
         onSubmit={handleSubmit}
         className="grid grid-cols-1 sm:grid-cols-2 gap-4"
@@ -107,7 +107,7 @@ const Contact = () => {
 
         <button
           type="submit"
-          className="sm:col-span-2 border px-10 cursor-pointer transition-colors ease-in-out hover:text-black hover:bg-white py-2 mt-4 rounded bg-black text-white"
+          className="sm:col-span-2 border px-10 cursor-pointer transition-colors ease-in-out hover:text-black hover:bg-white py-2 mt-4 rounded text-white"
         >
           Submit
         </button>
