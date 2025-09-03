@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // assets
 import svg from "../assets/Growth-corridor.svg";
 import bandraWorli from "../assets/circle/Bandra-Worli.webp";
-import BulletTrain from "../assets/circle/Bullet-train.webp";
+import BulletTrain from "../assets/circle/Bullet-Train.webp";
 import img_1 from "../assets/circle/img_1.webp";
 import metroLines from "../assets/circle/Metro-Lines.webp";
 import mumbaiCoastalRoad from "../assets/circle/Mumbai-Coastal-Road.webp";
