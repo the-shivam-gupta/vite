@@ -1,10 +1,11 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import growthCorridorLeft from "../assets/Growth-corridor-left.webp";
 import growthCorridorRight from "../assets/Growth-corridor-right.webp";
 import { Phone, Monitor, MessageCircleMore } from "lucide-react";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const leftOverlay = useRef(null);
   const rightOverlay = useRef(null);
   const leftPane = useRef(null);
@@ -89,25 +90,26 @@ const Navbar = () => {
   return (
     <div className="relative w-full min-h-screen font-sans overflow-hidden bg-white">
       <header className="absolute top-0 left-0 w-full z-40">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-6 flex items-center justify-between text-white">
+          {/* Logo Block */}
           <div className="flex items-center gap-4">
             {/* Left Logo Block */}
             <div className="flex flex-col text-white">
-              <span className="text-3xl font-extrabold tracking-tight leading-none">
+              <span className="text-2xl sm:text-3xl font-extrabold tracking-tight leading-none">
                 GROWTH
               </span>
-              <span className="text-[10px] leading-0 text-end font-semibold tracking-widest mt-1">
+              <span className="text-[9px] sm:text-[10px] leading-0 text-end font-semibold tracking-widest mt-1">
                 HOUSING
               </span>
             </div>
 
             {/* Divider Line */}
-            <div className="h-12 w-px bg-white/70"></div>
+            <div className="h-10 sm:h-12 w-px bg-white/70"></div>
 
             {/* Right Text Block */}
-            <div className="flex flex-col text-[10px] uppercase tracking-widest text-white">
+            <div className="flex flex-col text-[9px] sm:text-[10px] uppercase tracking-widest text-white">
               {/* Top Line */}
-              <span className="h-px w-10 bg-white mb-1"></span>
+              <span className="h-px w-8 sm:w-10 bg-white mb-1"></span>
 
               {/* Text Block */}
               <div className="leading-tight">
@@ -118,10 +120,11 @@ const Navbar = () => {
               </div>
 
               {/* Bottom Line */}
-              <span className="h-px w-10 bg-white mt-1"></span>
+              <span className="h-px w-8 sm:w-10 bg-white mt-1"></span>
             </div>
           </div>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-10 uppercase text-sm tracking-wide text-white">
             {[
               "About us",
@@ -139,12 +142,42 @@ const Navbar = () => {
             ))}
           </nav>
 
-          <div className="relative text-white tracking-wide font-medium cursor-pointer after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[1px] after:bg-white after:transition-all after:duration-300 hover:after:w-full">
+          {/* Login Button - desktop */}
+          <div className="hidden md:block relative text-white tracking-wide font-medium cursor-pointer after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[1px] after:bg-white after:transition-all after:duration-300 hover:after:w-full">
             Login
           </div>
 
-          <button className="md:hidden ml-4 text-white">Menu</button>
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden ml-4 text-white text-lg font-semibold"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? "Close" : "Menu"}
+          </button>
         </div>
+
+        {/* Mobile Dropdown */}
+        {menuOpen && (
+          <div className="md:hidden bg-black/90 text-white px-6 py-6 space-y-4 text-center">
+            {[
+              "About us",
+              "Manifesto",
+              "Promises",
+              "Growth Corridors",
+              "Contact",
+            ].map((item, idx) => (
+              <a
+                key={idx}
+                className="block text-base font-medium tracking-wide hover:text-green-400 transition"
+              >
+                {item}
+              </a>
+            ))}
+            <div className="block text-base font-semibold tracking-wide mt-4 cursor-pointer hover:text-green-400 transition">
+              Login
+            </div>
+          </div>
+        )}
       </header>
 
       <main className="flex flex-col md:flex-row h-screen relative">
@@ -199,21 +232,23 @@ const Navbar = () => {
       </main>
 
       {/* Floating CTA */}
-      <div className="absolute right-4 bottom-6 z-50 flex flex-col items-stretch gap-6 w-48">
-        <button className="w-full sm:w-40 bg-white/90 text-black py-3 px-6 rounded-full shadow-lg flex items-center justify-center gap-3">
-          <Monitor className="w-5 h-5" />
-          <span className="text-sm">Register</span>
-        </button>
+      <div className="sticky top-4 z-20">
+        <div className="hidden absolute right-4 bottom-6 z-50 sm:flex flex-col items-stretch gap-6 w-48">
+          <button className="cursor-pointer w-full sm:w-40 bg-white/90 text-black py-3 px-6 rounded-full shadow-lg flex items-center justify-center gap-3">
+            <Monitor className="w-5 h-5" />
+            <span className="text-sm">Register</span>
+          </button>
 
-        <button className="w-full sm:w-40 bg-green-500 text-white py-4 px-6 rounded-full shadow-lg flex items-center justify-center gap-3">
-          <Phone className="w-5 h-5" />
-          <span className="text-sm">Talk to us</span>
-        </button>
+          <button className="cursor-pointer w-full sm:w-40 bg-green-500 text-white py-4 px-6 rounded-full shadow-lg flex items-center justify-center gap-3">
+            <Phone className="w-5 h-5" />
+            <span className="text-sm">Talk to us</span>
+          </button>
 
-        <button className="w-full sm:w-40 bg-green-500 text-white py-4 px-6 rounded-full shadow-lg flex items-center justify-center gap-3">
-          <MessageCircleMore className="w-5 h-5" />
-          <span className="text-sm">Chat with us</span>
-        </button>
+          <button className="cursor-pointer w-full sm:w-40 bg-green-500 text-white py-4 px-6 rounded-full shadow-lg flex items-center justify-center gap-3">
+            <MessageCircleMore className="w-5 h-5" />
+            <span className="text-sm">Chat with us</span>
+          </button>
+        </div>
       </div>
     </div>
   );

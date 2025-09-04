@@ -1,12 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-const Label = ({ name, className }) => {
-  return (
-    <div>
-      <label className={`${className} text-base font-medium`}>{name}</label>
-    </div>
-  );
-};
+const Label = ({ name }) => (
+  <label className="block text-sm font-semibold uppercase">{name}</label>
+);
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -16,103 +12,80 @@ const Contact = () => {
     feedback: "",
   });
 
-  // Load saved form data on mount
-  useEffect(() => {
-    const savedForm = localStorage.getItem("contactForm");
-    if (savedForm) {
-      setForm(JSON.parse(savedForm));
-    }
-  }, []);
-
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Save to localStorage
-    localStorage.setItem("contactForm", JSON.stringify(form));
-
-    alert("Form submitted and saved locally ✅");
-
-    // Clear form after submit
-    setForm({
-      name: "",
-      contact: "",
-      email: "",
-      feedback: "",
-    });
+    alert("Form submitted ✅");
+    setForm({ name: "", contact: "", email: "", feedback: "" });
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <form
-        onSubmit={handleSubmit}
-        className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-      >
+    <form onSubmit={handleSubmit} className="w-full text-white">
+      {/* Row 1: Name - Mobile - Email */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <Label name="Name" />
           <input
             name="name"
             value={form.name}
             onChange={handleChange}
-            className="w-full border-b-2 border-l-2 rounded px-2 py-1"
-            placeholder="Enter your name"
+            className="w-full bg-transparent border-b border-white/40 focus:border-white outline-none pb-2"
             required
           />
         </div>
         <div>
-          <Label name="Contact" />
+          <Label name="Mobile Number" />
           <input
             name="contact"
             type="number"
             value={form.contact}
             onChange={handleChange}
-            className="w-full border-b-2 border-l-2 rounded px-2 py-1"
-            placeholder="Enter your phone number"
+            className="w-full bg-transparent border-b border-white/40 focus:border-white outline-none pb-2"
             required
           />
         </div>
-        <div className="sm:col-span-2">
-          <Label name="Email" />
+        <div>
+          <Label name="Email Id" />
           <input
             name="email"
             type="email"
             value={form.email}
             onChange={handleChange}
-            className="w-full border-b-2 border-l-2 rounded px-2 py-1"
-            placeholder="Enter your email"
+            className="w-full bg-transparent border-b border-white/40 focus:border-white outline-none pb-2"
             required
           />
         </div>
-        <div className="sm:col-span-2">
-          <Label name="Feedback" />
-          <textarea
-            name="feedback"
-            value={form.feedback}
-            onChange={handleChange}
-            rows={3}
-            className="w-full border-b-2 border-l-2 rounded px-2 py-1"
-            placeholder="Your feedback..."
-            required
-          />
-        </div>
+      </div>
 
+      {/* Row 2: Feedback */}
+      <div className="mt-4">
+        <Label name="What Do You Have In Mind?" />
+        <textarea
+          name="feedback"
+          value={form.feedback}
+          onChange={handleChange}
+          rows={2}
+          className="w-full bg-transparent border-b border-white/40 focus:border-white outline-none resize-none"
+          required
+        />
+      </div>
+
+      {/* Buttons Row */}
+      <div className="mt-4 flex justify-between items-center">
+        {/* Submit button */}
         <button
           type="submit"
-          className="sm:col-span-2 border px-10 cursor-pointer transition-colors ease-in-out hover:text-black hover:bg-white py-2 mt-4 rounded text-white"
+          className="relative cursor-pointer text-3xl font-medium tracking-wide transform scale-y-125 transition group"
         >
           Submit
+          <span className="absolute left-0 -bottom-1 w-0 h-[0.1px] bg-gray-300 transition-all duration-300 group-hover:w-full"></span>
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 
